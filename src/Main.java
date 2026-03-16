@@ -95,7 +95,9 @@ class Main{
                 case 4:
                     System.out.print("Exiting...");
                     return;
-
+                default:
+                    System.out.println("Invalid choice");
+                    break;
             }
         }
     }
