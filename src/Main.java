@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Main{
@@ -39,65 +40,73 @@ class Main{
 
         while (true){
             printMenu();
-            int choice = scanner.nextInt();
-            switch (choice){
-                case 1:
-                    printItems(items);
-                    System.out.print("Enter Item(0-5): ");
-                    int itemChoice = scanner.nextInt();
-                    switch (itemChoice){
-                        case 0:
-                            inventory.addItem(items.getFirst());
-                            break;
-                        case 1:
-                            inventory.addItem(items.get(1));
-                            break;
-                        case 2:
-                            inventory.addItem(items.get(2));
-                            break;
-                        case 3:
-                            inventory.addItem(items.get(3));
-                            break;
-                        case 4:
-                            inventory.addItem(items.get(4));
-                            break;
-                        case 5:
-                            inventory.addItem(items.get(5));
-                            break;
-                        default:
-                            System.out.println("Invalid Choice");
-                    }
-                    break;
-                case 2:
-                    if (inventory.inventory.isEmpty()){
-                        System.out.println("Inventory is empty");
-                    }else{
-                        System.out.print("Enter Item Name: ");
-                        scanner.nextLine();
-                        String itemName = scanner.nextLine();
-                        if (inventory.foundItem(itemName)){
-                            for (int i=0; i<inventory.inventory.size(); i++){
-                                if (itemName.equalsIgnoreCase(inventory.inventory.get(i).name)){
-                                    inventory.dropItems(inventory.inventory.get(i));
-                                    System.out.println("Item removed");
-                                    break;
-                                }
-                            }
-                        }else {
-                            System.out.println("Item not Found");
-                            break;
+            try{
+                int choice = scanner.nextInt();
+                switch (choice){
+                    case 1:
+                        printItems(items);
+                        System.out.print("Enter Item(0-5): ");
+                        int itemChoice = scanner.nextInt();
+                        switch (itemChoice){
+                            case 0:
+                                inventory.addItem(items.getFirst());
+                                break;
+                            case 1:
+                                inventory.addItem(items.get(1));
+                                break;
+                            case 2:
+                                inventory.addItem(items.get(2));
+                                break;
+                            case 3:
+                                inventory.addItem(items.get(3));
+                                break;
+                            case 4:
+                                inventory.addItem(items.get(4));
+                                break;
+                            case 5:
+                                inventory.addItem(items.get(5));
+                                break;
+                            default:
+                                System.out.println("Invalid Choice");
                         }
-                    }
+                        break;
+                    case 2:
+                        if (inventory.inventory.isEmpty()){
+                            System.out.println("Inventory is empty");
+                        }else{
+                            System.out.print("Enter Item Name: ");
+                            scanner.nextLine();
+                            String itemName = scanner.nextLine();
+                            if (inventory.foundItem(itemName)){
+                                for (int i=0; i<inventory.inventory.size(); i++){
+                                    if (itemName.equalsIgnoreCase(inventory.inventory.get(i).name)){
+                                        inventory.dropItems(inventory.inventory.get(i));
+                                        System.out.println("Item removed");
+                                        break;
+                                    }
+                                }
+                            }else {
+                                System.out.println("Item not Found");
+                                break;
+                            }
+                        }
 
-                case 3:
-                    inventory.showItems();
-                    break;
-                case 4:
-                    System.out.print("Exiting...");
-                    return;
-                default:
-                    System.out.println("Invalid choice");
-                    break;
+                    case 3:
+                        inventory.showItems();
+                        break;
+                    case 4:
+                        System.out.print("Exiting...");
+                        return;
+                    default:
+                        System.out.println("Invalid choice");
+                        break;
+                }
+            }
+            catch (InputMismatchException e){
+                System.out.println("Something Went Wrong Try Again");
+                scanner.nextLine();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }
