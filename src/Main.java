@@ -47,28 +47,7 @@ class Main{
                         printItems(items);
                         System.out.print("Enter Item(0-5): ");
                         int itemChoice = scanner.nextInt();
-                        switch (itemChoice){
-                            case 0:
-                                inventory.addItem(items.getFirst());
-                                break;
-                            case 1:
-                                inventory.addItem(items.get(1));
-                                break;
-                            case 2:
-                                inventory.addItem(items.get(2));
-                                break;
-                            case 3:
-                                inventory.addItem(items.get(3));
-                                break;
-                            case 4:
-                                inventory.addItem(items.get(4));
-                                break;
-                            case 5:
-                                inventory.addItem(items.get(5));
-                                break;
-                            default:
-                                System.out.println("Invalid Choice");
-                        }
+                        inventory.addItem(items.get(itemChoice));
                         break;
                     case 2:
                         if (inventory.inventory.isEmpty()){
@@ -90,6 +69,7 @@ class Main{
                                 break;
                             }
                         }
+                        break;
 
                     case 3:
                         inventory.showItems();
